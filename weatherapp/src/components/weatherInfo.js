@@ -7,7 +7,7 @@ const WeatherInfo = ({ city, day }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+      const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
       try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -15,6 +15,7 @@ const WeatherInfo = ({ city, day }) => {
         }
         const data = await response.json();
         setWeatherData(data);
+        console.log(data);
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
         console.error("Can't fetch", error);
@@ -29,12 +30,20 @@ const WeatherInfo = ({ city, day }) => {
     return <div>Loading...</div>; // Show loading message while fetching data
   }
 
+  const weatherForDay = weatherData.list[day * 8]; // Assuming 3-hour intervals, 8 intervals per day
+
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const date = new Date(weatherForDay.dt * 1000); // Convert Unix timestamp to JavaScript Date object
+  const dayName = daysOfWeek[date.getDay()];
+  const currentDate = date.toLocaleDateString(); // Get the current date in a readable format
+
   return (
     <div>
-      <h2>{weatherData.name}</h2>
+      <h2>{dayName}</h2>
+      <p>{currentDate}</p> {/* Display the current date */}
       <p>
-        {weatherData.weather && weatherData.weather[day]
-          ? weatherData.weather[day].description
+        {weatherForDay && weatherForDay.weather[0]
+          ? weatherForDay.weather[0].description
           : "No data available"}
       </p>
     </div>

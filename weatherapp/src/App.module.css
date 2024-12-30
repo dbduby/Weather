@@ -1,0 +1,25 @@
+.App {
+  background-color: #F2F2F2;
+}
+
+.Header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0D0D0D;
+  color: white;
+  height: 10vh;
+}
+
+.Cards {
+  color: #0D0D0D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 100vh;
+
+  /* gap: 20px; */
+  /* width: 200px; */
+  /* height: 300px; */
+}

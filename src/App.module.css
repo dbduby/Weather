@@ -1,25 +1,29 @@
+:root {
+  --background-color: #F2F2F2;
+  --header-background-color: #0D0D0D;
+  --header-color: white;
+}
+
 .App {
-  background-color: #F2F2F2;
+  background-color: var(--background-color);
 }
 
-.Header{
+.Header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0D0D0D;
-  color: white;
+  background-color: var(--header-background-color);
+  color: var(--header-color);
   height: 10vh;
+  font-size: 1.2vw; /* Use vw units for relative size */
 }
 
-.Cards {
-  color: #0D0D0D;
+.CardContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
-  border: 1px solid black;
-  height: 100vh;
-
-  /* gap: 20px; */
-  /* width: 200px; */
-  /* height: 300px; */
+  align-items: center; 
+  flex-wrap: wrap; 
+  gap: 0px;
+  width: 100%;
+  height: calc(100vh - 10vh); /* -10vh bc header takes up 10vh */
 }

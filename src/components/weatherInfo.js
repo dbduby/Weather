@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import styles from "./weatherInfo.css";
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 const WeatherInfo = ({ city, day }) => {
   const [weatherData, setWeatherData] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,10 +17,10 @@ const WeatherInfo = ({ city, day }) => {
         const data = await response.json();
         setWeatherData(data);
         console.log(data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false); // loading done
       } catch (error) {
         console.error("Can't fetch", error);
-        setLoading(false); // Set loading to false in case of error
+        setLoading(false); // loading done (because error)
       }
     };
 
@@ -30,15 +31,18 @@ const WeatherInfo = ({ city, day }) => {
     return <div>Loading...</div>; // Show loading message while fetching data
   }
 
-  const weatherForDay = weatherData.list[day * 8]; // Assuming 3-hour intervals, 8 intervals per day
+  // 3 hr interval, 8 intervals per day
+  const weatherForDay = weatherData.list[day * 8];
 
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const date = new Date(weatherForDay.dt * 1000); // Convert Unix timestamp to JavaScript Date object
+  
+  // date from unix (seconds) to java (milliseconds)
+  const date = new Date(weatherForDay.dt * 1000); 
   const dayName = daysOfWeek[date.getDay()];
-  const currentDate = date.toLocaleDateString(); // Get the current date in a readable format
+  const currentDate = date.toLocaleDateString();
 
   return (
-    <div>
+    <div className={styles.Card}>
       <h2>{dayName}</h2>
       <p>{currentDate}</p> {/* Display the current date */}
       <p>

@@ -9,9 +9,9 @@ export default function App() {
         <h1>Weather App</h1>
       </div>
 
-      <div className={styles.Cards}>
+      <div className={styles.CardContainer}>
         {[0, 1, 2, 3, 4].map((day) => (
-          <div className="box" key={day}>
+          <div className="Card" key={day}>
             <WeatherInfo city="Phoenix" day={day} />
           </div>
         ))}

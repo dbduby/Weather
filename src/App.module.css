@@ -27,3 +27,11 @@
   width: 100%;
   height: calc(100vh - 10vh); /* -10vh bc header takes up 10vh */
 }
+
+.SearchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  border-radius: 15px;
+}
